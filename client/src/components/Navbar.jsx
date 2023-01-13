@@ -5,7 +5,7 @@ import { useStateContext } from '../context';
 import { CustomButton } from './';
 import { logo, menu, search, thirdweb } from '../assets';
 import { navlinks } from '../constants';
-
+import { shortenAddress } from '../utils';
 const Navbar = () => {
   const navigate = useNavigate();
   const [isActive, setIsActive] = useState('dashboard');
@@ -31,9 +31,14 @@ const Navbar = () => {
       </div>
 
       <div className='sm:flex hidden flex-row justify-end gap-4'>
+        {/* <h4 className='font-epilogue font-semibold text-[14px] text-white break-all'>
+          {address ? shortenAddress(address) : ''}
+        </h4> */}
         <CustomButton
           btnType='button'
-          title={address ? 'Create a campaign' : 'Connect'}
+          title={
+            address ? 'Create a campaign ' + shortenAddress(address) : 'Connect'
+          }
           styles={address ? 'bg-[#1dc071]' : 'bg-[#8c6dfd]'}
           handleClick={() => {
             if (address) navigate('create-campaign');
